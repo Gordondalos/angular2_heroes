@@ -6,7 +6,6 @@ import { HeroService } from './share/hero.service';
     selector : 'my-heroes',
     templateUrl: 'app/heroes.component.html',
     styleUrls: ['app/heroes.component.css'],
-
 } )
 
 export class HeroesComponent implements OnInit { // имплементировал интерфейс онинит, чтобы реализовать метод онинит
