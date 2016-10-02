@@ -1,44 +1,33 @@
 import { Component, OnInit } from '@angular/core';
-import { Hero } from './share/hero';
-import { HeroService } from './share/hero.service';
-import { Router } from '@angular/router'
+import { Router }            from '@angular/router';
 
-@Component ( {
+import { Hero }                from './share/hero';
+import { HeroService }         from './share/hero.service';
+
+@Component({
     moduleId: module.id,
-    selector : 'my-heroes',
-    templateUrl : 'heroes.component.html',
-    styleUrls : [ 'heroes.component.css' ],
-} )
+    selector: 'my-heroes',
+    templateUrl: 'heroes.component.html',
+    styleUrls: [ 'heroes.component.css' ]
+})
+export class HeroesComponent implements OnInit {
+    heroes: Hero[];
+    selectedHero: Hero;
 
-export class HeroesComponent implements OnInit { // имплементировал интерфейс онинит, чтобы реализовать метод онинит
+    constructor(
+        private heroService: HeroService,
+        private router: Router) { }
 
-    heroes : Hero[] = [];
-    selectedHero : Hero;
-
-    ngOnInit () {       // реализовал метод он инит чтобы в нем вызвать создание- получение героев
-        this.getHeroes ();
-    }
-
-    constructor (private router: Router, private _heroService : HeroService ) { // тут обьявлена приватная переменная херовыйсервис, она автоматом обьявлет переменную этого класса
-
-    }
-
-    getHeroes () {
-        // прямая реализация
-        //this.heroes = this._heroService.getHer(); // вызвал метод
-
-        /*Реализвация через промис*/
-        this._heroService.getHer ().then ( heroes=>this.heroes = heroes ); // вызвал метод
-    }
-
-    onSelect ( hero : Hero ) {
-        this.router.navigate ( [ '/hero', hero.id ] );
+    getHeroes(): void {
+        this.heroService
+            .getHer()
+            .then(heroes => this.heroes = heroes);
     }
 
     add(name: string): void {
         name = name.trim();
         if (!name) { return; }
-        this._heroService.create(name)
+        this.heroService.create(name)
             .then(hero => {
                 this.heroes.push(hero);
                 this.selectedHero = null;
@@ -46,7 +35,7 @@ export class HeroesComponent implements OnInit { // имплементирова
     }
 
     delete(hero: Hero): void {
-        this._heroService
+        this.heroService
             .delete(hero.id)
             .then(() => {
                 this.heroes = this.heroes.filter(h => h !== hero);
@@ -54,8 +43,15 @@ export class HeroesComponent implements OnInit { // имплементирова
             });
     }
 
+    ngOnInit(): void {
+        this.getHeroes();
+    }
 
+    onSelect(hero: Hero): void {
+        this.selectedHero = hero;
+    }
+
+    gotoDetail(): void {
+        this.router.navigate(['/hero', this.selectedHero.id]);
+    }
 }
-
-
-
