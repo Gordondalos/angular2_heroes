@@ -26,7 +26,11 @@ export class AppComponent implements OnInit { // имплементировал 
     }
 
     getHeroes () {
-        this.heroes = this._heroService.getHer (); // вызвал метод
+        // прямая реализация
+        //this.heroes = this._heroService.getHer(); // вызвал метод
+
+        /*Реализвация через промис*/
+         this._heroService.getHer().then(heroes=>this.heroes = heroes); // вызвал метод
     }
 
     onSelect ( hero : Hero ) {

@@ -5,6 +5,11 @@ import { HEROES } from './mock-heroes';
 
 export class HeroService {
     getHer () {
-        return HEROES;
+        /*Прямая реализация*/
+        // return HEROES;
+
+
+        /*Реализация через ромис*/
+        return Promise.resolve(HEROES);
     }
 }
