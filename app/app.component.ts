@@ -9,10 +9,12 @@ import { HeroService } from './share/hero.service';
     providers : [ HeroService ] // Подключил сервис
 
 } )
-export class AppComponent {
-    title: string;
 
-    constructor(){
+
+export class AppComponent {
+    title : string;
+
+    constructor () {
         this.title = "Tour of Heroes";
     }
 
