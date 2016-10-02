@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Hero } from '../share/hero';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { HeroService } from "../share/hero.service";
+import { Location } from '@angular/common';
 
 
 
@@ -16,6 +17,7 @@ export class HeroDetailComponent implements OnInit{
 
     constructor(private route: ActivatedRoute,
                 private router: Router,
+                private location: Location,
                 private _heroService: HeroService){
 
     }
@@ -33,5 +35,18 @@ export class HeroDetailComponent implements OnInit{
 
         this.router.navigate(['/heroes', { id: heroId, heroname: heroname }]);
     }
+
+    save(): void {
+        this._heroService.update(this.hero)
+            .then(() => this.goBack());
+    }
+
+    goBack(): void {
+        this.location.back();
+    }
+
+
+
+
 
 }

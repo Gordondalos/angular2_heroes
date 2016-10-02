@@ -6,14 +6,15 @@ import { Router } from '@angular/router';
 
 
 @Component({
-    templateUrl: 'app/home.component.html',
-    styleUrls: ['app/home.component.css']
+    moduleId: module.id,
+    templateUrl: './home.component.html',
+    styleUrls: ['./home.component.css']
 })
 
 export class HomeComponent implements OnInit{
 
 
-    heroes: Hero[];
+    heroes: Hero[] = [];
 
     constructor(private _heroService: HeroService,  private router: Router ) {}
 
