@@ -11,7 +11,7 @@ import { HeroService } from './share/hero.service';
 
 } )
 
-export class AppComponent implements OnInit { // имплементировал интерфейс онинит, чтобы реализовать метод онинит
+export class HeroesComponent implements OnInit { // имплементировал интерфейс онинит, чтобы реализовать метод онинит
     title = 'Tour of heroes';
     heroes : Hero[];
     selectedHero : Hero;
